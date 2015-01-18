@@ -122,7 +122,7 @@ Here's where your abstract will eventually go. The above text is all in the cent
 \chapter*{Acknowledgements} %I use an asterisk because I don't want my acknowledgements in the table of contents. I use \chapter to make sure that the acknowledgements go on the correct side of the page when you print out the dissertation.
 %Then a dedication page
 \newpage
-\chapter*{Dedication} %Same here -- asterisk so that my dedication doesn't show up in the table of contents.
+\chapter*{Dedication} %Same here -- asterisk so that my dedication doesn't show up in the table of contents. You might want to take out "Dedication" as the title of this chapter. It's just here for a placeholder.
 
 
 %What follows is the main text of your dissertation. You can comment out lines if you want to exclude them from your document for drafts. Everything after \mainmatter will get Arabic numbers centered on the bottom of the page.
@@ -132,9 +132,9 @@ Here's where your abstract will eventually go. The above text is all in the cent
 %I use subdirectories for each part of my dissertation just to keep the files tidy. LaTeX generates a lot of different files for output, and using subdirectories allows you to find your .tex files more easily.
 
 \include{./Introduction/Introduction}
-\include{./ChapterI/ChapterI}
-\include{./ChapterII/ChapterII}
-\include{./ChapterIII/ChapterIII}
+\include{./Chapter1/Chapter1}
+\include{./Chapter2/Chapter2}
+\include{./Chapter3/Chapter3}
 \include{./Conclusion/Conclusion}
 
 %This final section includes your bibliography.

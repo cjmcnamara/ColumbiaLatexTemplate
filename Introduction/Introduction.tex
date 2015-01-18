@@ -1,8 +1,9 @@
-%This is the introduction of the dissertation
+%The following command starts your introduction. 
 
-%The following command starts your chapter. If you want different titles used in your ToC and at the top of the page throughout the chapter, you can specify those values here. Since Columbia doesn't want extra information in the headers and footers, the "Top of Page Title" value won't actually appear.
+\chapter*{Introduction} %Your introduction isn't a numbered chapter, so we use the asterisk here.
 
-\chapter[Table of Contents Title][Top of Page Title]{Title of Introduction}
+\addcontentsline{toc}{chapter}{Introduction} %This command puts your introduction in your table of contents even though we have used the asterisk in the \chapter command above.
+
 
 Here you can write some introductory remarks about your chapter.
 I like to give each sentence its own line.
