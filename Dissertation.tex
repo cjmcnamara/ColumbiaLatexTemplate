@@ -1,0 +1,149 @@
+%Dissertation Template for Columbia University Ph.D. programs
+%By Charles McNamara, 2015
+%I posted this document under a CC0 public domain license -- do whatever you want with it!
+%It's probably a good idea to review the university guidelines just so you know what you want your dissertation to look like. You can read about those guidelines at this site: http://gsas.columbia.edu/content/formatting-guidelines.
+%Good luck writing your dissertation!
+
+
+
+
+% This is the main document file for the dissertation. You should not include any of your actual chapters or other substantive writing in this file.
+%First we have to set up the style and formatting of the pages.
+
+\documentclass[letterpaper,12pt]{memoir} %The memoir class is great for longer works that use separate chapters. The Dissertation Office recommends 10-pt Arial or 12-pt Times New Roman. I use 12-pt for readability.
+
+%Below are some LaTeX packages to include to make sure that your Unicode characters render correctly. This is especially important if your dissertation includes polytonic Greek!
+
+\RequireXeTeX %XeTeX allows you to use Unicode characters like polytonic Greek in your writing.
+\usepackage{fontspec} %Allows you to load fonts in XeTeX.
+\defaultfontfeatures{Mapping=tex-text} %Allows you to get pretty TeX ligatures in your writing.
+\usepackage{xunicode} %You need this for Unicode fonts to work properly.
+\usepackage{xltxtra} %Some extra font capabilities for XeTeX
+\usepackage{setspace} %Allows you to set different spacing (double, etc.) throughout your writing.
+
+\setmainfont{Linux Libertine O} %This is a really readable serif font. It renders polytonic Greek better than any other OpenType font I've found, including Times New Roman. I now use it for everything, including class handouts. Highly recommended for classicists.
+
+
+
+%Here is some stuff on the bibliography. You want to keep your bibliography file in the same directory as this file.
+
+\usepackage[american]{babel} %Enables hyphenation and date formats according to American conventions. Change "american" to "british" (or another value) if you work outside the US.
+\usepackage[backend=bibtex8,style=authoryear-icomp,texencoding=utf8,bibencoding=utf8]{biblatex} %The command here uses biblatex to render your bibliography, and it tells biblatex to use Unicode fonts. You can change the style of your citations easily by changing the value for "style" -- I use authoryear-icomp which takes care of the id/ibid citations automatically. There are many styles available if you want to change it.
+%I have tried to use biber instead of biblatex many times, but it's never worked properly for me. I use biblatex, but feel free to try biber instead. 
+
+\addbibresource{./Bibliography.bib} %Your bibliography file. I use JabRef to keep track of my bibliography. Highly recommended, and free! You can use Zotero if you want, but I've had trouble exporting to .bib files from my Zotero database.
+\setlength{\bibitemsep}{\baselineskip} %Skip lines between bibliography entries. Columbia requires that you skip a line between entries.
+
+
+
+%Here you can set margins and other page formatting
+
+\setlrmarginsandblock{3.175cm}{3.175cm}{*} %Left and right margin -- the dissertation office requires at least 1-inch margins
+\setulmarginsandblock{2.54cm}{2.54cm}{*}  %Upper and lower margin -- same thing, at least 1-inch margins
+\checkandfixthelayout %A function of the memoir class that finds the right number of lines per page and apparently tidies up the formatting in other mysterious ways...?
+
+
+
+
+% Below we start to set up the document itself, including how to use spacing throughout the dissertation.
+
+\begin{document}
+
+\sloppy %If I don't include sloppy, then Greek and Latin words screw up margins all over. If you don't include weird languages in your dissertation, you can probably leave this one out.
+\chapterstyle{chappell} % Nice formatting for chapter headings. Check out the documentation for the memoir class for other options.
+\footnotesep\baselineskip % Footnotes need to have a space between each one for Columbia's Dissertation Office. 
+\DoubleSpacing %Set roomier body text throughout your writing. The dissertation office requires that you use double-spacing throughout your main body text.
+\expandafter\def\expandafter\quote\expandafter{\quote\SingleSpace} %Keep all block quotes single-spaced regardless of body text spacing.
+\pagestyle{plain} %Put page numbers at the bottom-center for the whole dissertation. Columbia's dissertation office requires that the numbers appear at this location on the page throughout the document.
+
+
+
+
+%The section that follows renders the "Cover pages and Abstract" part of your dissertation.
+
+%We need to define a customized command to render Columbia's required title page
+%Be sure you replace the title and author with the title of your dissertation and your name!
+\newcommand*{\TitleColumbia}{\begingroup
+\begin{center}
+YOUR TITLE HERE\\
+YOUR NAME\par
+\vspace*{5 in} %This is a sloppy way to get the "Submitted in partial fulfillment" part to move to the bottom of the page
+%\begin{SingleSpace} can be used here if you want the "Submitted" text to be single-spaced.
+Submitted in partial fulfillment of the\\
+requirements for the degree of\\
+Doctor of Philosophy\\
+in the Graduate School of Arts and Sciences\par
+%\end{SingleSpace} here if you decide to use single-spacing on the "Submitted" text.
+\vfill
+COLUMBIA UNIVERSITY\\ 
+2015
+\end{center}
+\endgroup} 
+
+%These four commands make sure that your title page doesn't count toward your page number counts and that there is no extra header and footer on the page. The final command here also renders the page as you've defined it above.
+\pagenumbering{gobble}
+\clearpage
+\thispagestyle{empty}
+\TitleColumbia
+
+%What follows is the copyright page
+%We make sure that LaTeX moves to the next page, doesn't use page numbers, and doesn't include any headers or footers.
+\newpage
+\pagenumbering{gobble}
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+\vspace*{7.5 in} %Another sloppy way to get the copyright notice to move to the bottom of the page.
+© YEAR\\
+YOUR NAME\\
+All rights reserved
+\end{center} %There are lots of copyright options available for your dissertation, including Creative Commons licensing. You should scope out Columbia's Dissertation Office website for more information.
+
+%Now we need the abstract
+%Again, we prevent page numbers and headers and footers from appearing on this page.
+\newpage
+\pagenumbering{gobble}
+\clearpage
+\thispagestyle{empty}
+\begin{center}
+ABSTRACT\\ %You need to keep this text here in all capitals. Don't change it.
+Your title here\\ %Do of course change this to the title of your dissertation.
+Your name\\ %Your name here
+\end{center}
+Here's where your abstract will eventually go. The above text is all in the center, but the abstract itself should be written as a regular paragraph on the page, and it should not have indentation. Just replace this text.
+
+%Phew, you're done with the "Cover pages and abstract" part. Now to the "Prefatory pages."
+\frontmatter %This command lets LaTeX know that you want lowercase Roman page numbers in these next sections.
+
+\tableofcontents %LaTeX automatically renders your table of contents using your \chapter and \section commands throughout the whole document. If you don't want something to appear in the table of contents, simply use an asterisk in the command, like \chapter*{} or \section*{}
+
+%Here I need an acknowledgments page.
+\newpage
+\chapter*{Acknowledgements} %I use an asterisk because I don't want my acknowledgements in the table of contents. I use \chapter to make sure that the acknowledgements go on the correct side of the page when you print out the dissertation.
+%Then a dedication page
+\newpage
+\chapter*{Dedication} %Same here -- asterisk so that my dedication doesn't show up in the table of contents.
+
+
+%What follows is the main text of your dissertation. You can comment out lines if you want to exclude them from your document for drafts. Everything after \mainmatter will get Arabic numbers centered on the bottom of the page.
+
+\mainmatter
+
+%I use subdirectories for each part of my dissertation just to keep the files tidy. LaTeX generates a lot of different files for output, and using subdirectories allows you to find your .tex files more easily.
+
+\include{./Introduction/Introduction}
+\include{./ChapterI/ChapterI}
+\include{./ChapterII/ChapterII}
+\include{./ChapterIII/ChapterIII}
+\include{./Conclusion/Conclusion}
+
+%This final section includes your bibliography.
+
+\backmatter
+
+\SingleSpacing %Start single-spacing text before you start the bibliography. We used \bibitemsep earlier in this document to keep bibliography items separated by one line of blank space, but we need to keep the entries themselves single-spaced.
+\printbibliography %Print the bibliography. Your bibliography file is defined as Bibliography.bib earlier in this document by the command \addbibresource. It should be kept in the same folder as this file.
+
+
+
+\end{document} %All done! Now you're a doctor.
