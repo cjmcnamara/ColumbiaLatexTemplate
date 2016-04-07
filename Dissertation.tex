@@ -1,5 +1,5 @@
 %Dissertation Template for Columbia University Ph.D. programs
-%By Charles McNamara, 2015
+%By Charles McNamara, 2016
 %I posted this document under a CC0 public domain license -- do whatever you want with it!
 %It's probably a good idea to review the university guidelines just so you know what you want your dissertation to look like. You can read about those guidelines at this site: http://gsas.columbia.edu/content/formatting-guidelines.
 %Good luck writing your dissertation!
@@ -19,9 +19,14 @@
 \defaultfontfeatures{Mapping=tex-text} %Allows you to get pretty TeX ligatures in your writing.
 \usepackage{xunicode} %You need this for Unicode fonts to work properly.
 \usepackage{xltxtra} %Some extra font capabilities for XeTeX
+\DisemulatePackage{setspace} %You need to use this package for "true MS Word" double-spacing.
 \usepackage{setspace} %Allows you to set different spacing (double, etc.) throughout your writing.
+% \usepackage{hyperref} % Use if you want hyperlinks in your table of contents
 
 \setmainfont{Linux Libertine O} %This is a really readable serif font. It renders polytonic Greek better than any other OpenType font I've found, including Times New Roman. I now use it for everything, including class handouts. Highly recommended for classicists.
+
+\usepackage{enumitem} % To fix spacing of bullet point lists
+\setlist{noitemsep} % or \setlist{nosep} for space around whole list
 
 
 
@@ -52,77 +57,39 @@
 \sloppy %If I don't include sloppy, then Greek and Latin words screw up margins all over. If you don't include weird languages in your dissertation, you can probably leave this one out.
 \chapterstyle{chappell} % Nice formatting for chapter headings. Check out the documentation for the memoir class for other options.
 \footnotesep\baselineskip % Footnotes need to have a space between each one for Columbia's Dissertation Office. 
-\DoubleSpacing %Set roomier body text throughout your writing. The dissertation office requires that you use double-spacing throughout your main body text.
+\setstretch{2} %Set line spacing to "true MS Word" double-spacing
+%\DoubleSpace % Use LaTeX double-spacing (more like 1.666 spacing)
+
 \expandafter\def\expandafter\quote\expandafter{\quote\SingleSpace} %Keep all block quotes single-spaced regardless of body text spacing.
 \pagestyle{plain} %Put page numbers at the bottom-center for the whole dissertation. Columbia's dissertation office requires that the numbers appear at this location on the page throughout the document.
 
 
 
+%% Here's the Title Page
+\include{./FrontMatter/TitlePage}
 
-%The section that follows renders the "Cover pages and Abstract" part of your dissertation.
+%% Here's the copyright page. I use a Creative Commons license.
+\include{./FrontMatter/Copyright}
 
-%We need to define a customized command to render Columbia's required title page
-%Be sure you replace the title and author with the title of your dissertation and your name!
-\newcommand*{\TitleColumbia}{\begingroup
-\begin{center}
-YOUR TITLE HERE\\
-YOUR NAME\par
-\vspace*{5 in} %This is a sloppy way to get the "Submitted in partial fulfillment" part to move to the bottom of the page
-%\begin{SingleSpace} can be used here if you want the "Submitted" text to be single-spaced.
-Submitted in partial fulfillment of the\\
-requirements for the degree of\\
-Doctor of Philosophy\\
-in the Graduate School of Arts and Sciences\par
-%\end{SingleSpace} here if you decide to use single-spacing on the "Submitted" text.
-\vfill
-COLUMBIA UNIVERSITY\\ 
-2015
-\end{center}
-\endgroup} 
+%% Here's the Abstract
+\include{./FrontMatter/Abstract}
 
-%These four commands make sure that your title page doesn't count toward your page number counts and that there is no extra header and footer on the page. The final command here also renders the page as you've defined it above.
-\pagenumbering{gobble}
-\clearpage
-\thispagestyle{empty}
-\TitleColumbia
 
-%What follows is the copyright page
-%We make sure that LaTeX moves to the next page, doesn't use page numbers, and doesn't include any headers or footers.
-\newpage
-\pagenumbering{gobble}
-\clearpage
-\thispagestyle{empty}
-\begin{center}
-\vspace*{7.5 in} %Another sloppy way to get the copyright notice to move to the bottom of the page.
-© YEAR\\
-YOUR NAME\\
-All rights reserved
-\end{center} %There are lots of copyright options available for your dissertation, including Creative Commons licensing. You should scope out Columbia's Dissertation Office website for more information.
 
-%Now we need the abstract
-%Again, we prevent page numbers and headers and footers from appearing on this page.
-\newpage
-\pagenumbering{gobble}
-\clearpage
-\thispagestyle{empty}
-\begin{center}
-ABSTRACT\\ %You need to keep this text here in all capitals. Don't change it.
-Your title here\\ %Do of course change this to the title of your dissertation.
-Your name\\ %Your name here
-\end{center}
-Here's where your abstract will eventually go. The above text is all in the center, but the abstract itself should be written as a regular paragraph on the page, and it should not have indentation. Just replace this text.
+\frontmatter
+\tableofcontents % You need to put your ToC after frontmatter so that it will get lowercase Roman numerals.
 
-%Phew, you're done with the "Cover pages and abstract" part. Now to the "Prefatory pages."
-\frontmatter %This command lets LaTeX know that you want lowercase Roman page numbers in these next sections.
+%A list of graphs and illustrations should go here if you use any.
 
-\tableofcontents %LaTeX automatically renders your table of contents using your \chapter and \section commands throughout the whole document. If you don't want something to appear in the table of contents, simply use an asterisk in the command, like \chapter*{} or \section*{}
+% Acknowledgements
+\include{./FrontMatter/Acknowledgments}
 
-%Here I need an acknowledgments page.
-\newpage
-\chapter*{Acknowledgements} %I use an asterisk because I don't want my acknowledgements in the table of contents. I use \chapter to make sure that the acknowledgements go on the correct side of the page when you print out the dissertation.
-%Then a dedication page
-\newpage
-\chapter*{Dedication} %Same here -- asterisk so that my dedication doesn't show up in the table of contents. You might want to take out "Dedication" as the title of this chapter. It's just here for a placeholder.
+% Dedication
+\include{./FrontMatter/Dedication}
+
+% Preface if you have one
+
+
 
 
 %What follows is the main text of your dissertation. You can comment out lines if you want to exclude them from your document for drafts. Everything after \mainmatter will get Arabic numbers centered on the bottom of the page.
